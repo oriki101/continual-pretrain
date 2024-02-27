@@ -1,0 +1,40 @@
+model:
+  model: elyza/ELYZA-japanese-Llama-2-7b
+  tokenizer: elyza/ELYZA-japanese-Llama-2-7b
+  use_cache: False
+  max_length: 512
+
+
+train: # huggingfaceのTrainingArgumentsで利用
+  output_dir: /scratch/acf15881gm
+  evaluation_strategy: steps
+  logging_strategy: steps
+  save_strategy: steps
+  learning_rate: 1e-6
+  num_train_epochs: 3
+  per_device_train_batch_size: 3
+  per_device_eval_batch_size: 3
+  gradient_accumulation_steps: 2
+  gradient_checkpointing: True
+  weight_decay: 0.01 # 適当
+  warmup_ratio: 0.1 # 適当
+  optim: adamw_torch # 適当
+  fp16: True
+  bf16: False
+  dataloader_num_workers: 4
+  eval_steps: 50
+  save_steps: 50
+  logging_steps: 50
+  run_name: test # wandbのプロジェクト名
+  save_total_limit: 2
+  save_on_each_node: False
+  neftune_noise_alpha: 5 # NEFTTune　適当
+  deepspeed: ./configs/deepspeed/ds_config_zero3.json
+  report_to: wandb
+  
+seed: 42
+
+dataset:
+  path: hotchpotch/wikipedia-ja-20231030
+  subset: chunked #!!null
+  split: train
