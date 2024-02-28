@@ -50,5 +50,5 @@ mpirun -np ${NUM_GPUS} \
 	-mca pml ob1 -mca btl ^openib \
 	-mca coll ^hcoll \
 	--mca btl_tcp_if_include eno1 \
-	python train_deepspeed.py
+	python src/train_deepspeed.py
 
