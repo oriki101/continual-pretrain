@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../../incremental-pretrain:/kaggle/incremental-pretrain
+      - ../../continual-pretrain:/kaggle/continual-pretrain
     container_name: LLM 
     tty: true
     ports: 
